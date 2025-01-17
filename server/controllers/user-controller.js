@@ -1,6 +1,8 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import { userSchema } from "../utils/validator/user.validator.js";
+import { loginSchema } from "../utils/validator/user.validator.js";
+
 
 export const registerUser = async (req, res) => {
   try {
@@ -52,47 +54,63 @@ export const registerUser = async (req, res) => {
 };
 
 export const loginUser = async (req, res) => {
-  //get user input email and password
-  const { email, password } = req.body;
-
-  if (!email || !password) {
-    return res.status(400).json({
-      message: "please fill all the required fields",
+  try {
+    const { error, value } = loginSchema.validate(req.body, {
+      abortEarly: false,
     });
-  }
 
-  //check if the email exist
-  const user = await User.findOne({ email });
-  if (!user) {
-    return res.status(401).json({
-      message: "email or password is incorrect",
-    });
-  }
+    if (error) {
+      const errorMessages = error.details.map((detail) => detail.message);
+      throw new Error(errorMessages.join(", "));
+    }
+      //get user input email and password
+    const { email, password } = value;
 
-  //check if the password is correct
-  const isPasswordMatch = await bcrypt.compare(password, user.password);
-  if (!isPasswordMatch) {
-    return res.status(401).json({
-      message: "email or password is incorrect",
-    });
+
+    //check if the email exist
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(401).json({
+        message: "email or password is incorrect",
+      });
+    }
+
+    //check if the password is correct
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
+    if (!isPasswordMatch) {
+      return res.status(401).json({
+        message: " password is incorrect",
+      });
+    }
+
+        return res.status(200).json({
+          message: "user logged in successfully",
+          user,
+        });
+  }catch(error) {
+     return res.status(500).json({
+       message: error.message,
+     });
   }
+  
 
   //create a token and give exp date
-  const accessToken = jwt.sign(
-    { userId: user._id },
-    appTokens.accessTokenSecret,
-    {
-      subject: "accessApi",
-      expiresIn: appTokens.accessTokenExpiresIn,
-    }
-  );
+  // const accessToken = jwt.sign(
+  //   { userId: User._id },
+  //   appTokens.accessTokenSecret,
+  //   {
+  //     subject: "accessApi",
+  //     expiresIn: appTokens.accessTokenExpiresIn,
+  //   }
+  // );
 
-  return res.status(200).json({
-    id: user._id,
-    email: user.email,
-    fullName: user.firstName,
-    accessToken,
-  });
+  // return res.status(200).json({
+  //   id: user._id,
+  //   email: user.email,
+  //   fullName: user.firstName,
+  //   accessToken,
+  // });
 };
 
 // export const createUserWithValidation = async (req, res) => {

@@ -2,7 +2,9 @@ import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import { userSchema } from "../utils/validator/user.validator.js";
 import { loginSchema } from "../utils/validator/user.validator.js";
-
+import otpGenerator from "otp-generator";
+import { sendEmail } from "../utils/email/nodemailer.js";
+import jwt from "jsonwebtoken";
 
 export const registerUser = async (req, res) => {
   try {
@@ -16,9 +18,8 @@ export const registerUser = async (req, res) => {
       throw new Error(errorMessages.join(", "));
     }
 
-
     const { first_name, last_name, email, password } = value; // got input ffrom the user
-  console.log("hello");
+    console.log("hello");
     //check for old users
     const oldUser = await User.findOne({ email });
     if (oldUser) {
@@ -27,23 +28,32 @@ export const registerUser = async (req, res) => {
       });
     }
 
-    console.log('hello')
+    console.log("hello");
     const salt = await bcrypt.genSalt();
 
     //enrypt my password
     const hashedPassword = await bcrypt.hash(password, salt);
-    //send email to my user
-    //validate
+
+    // generate otp
+    const otp = otpGenerator.generate(6, {
+      upperCaseAlphabets: false,
+      specialChars: false,
+    });
 
     const newUser = await User.create({
       first_name,
       last_name,
       email,
       password: hashedPassword,
+      otp,
     });
 
+    // send email
+    await sendEmail(email, otp);
+
     return res.status(201).json({
-      message: "user created successfully",
+      message:
+        "user created successfully, check your email to get your otp verification",
       newUser,
     });
   } catch (error) {
@@ -63,9 +73,8 @@ export const loginUser = async (req, res) => {
       const errorMessages = error.details.map((detail) => detail.message);
       throw new Error(errorMessages.join(", "));
     }
-      //get user input email and password
+    //get user input email and password
     const { email, password } = value;
-
 
     //check if the email exist
     const user = await User.findOne({ email });
@@ -73,6 +82,12 @@ export const loginUser = async (req, res) => {
     if (!user) {
       return res.status(401).json({
         message: "email or password is incorrect",
+      });
+    }
+
+    if (!user.is_verified) {
+      return res.status(400).json({
+        message: "user needs to be verified",
       });
     }
 
@@ -84,16 +99,15 @@ export const loginUser = async (req, res) => {
       });
     }
 
-        return res.status(200).json({
-          message: "user logged in successfully",
-          user,
-        });
-  }catch(error) {
-     return res.status(500).json({
-       message: error.message,
-     });
+    return res.status(200).json({
+      message: "user logged in successfully",
+      user,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+    });
   }
-  
 
   //create a token and give exp date
   // const accessToken = jwt.sign(
@@ -111,6 +125,67 @@ export const loginUser = async (req, res) => {
   //   fullName: user.firstName,
   //   accessToken,
   // });
+};
+
+export const verifyUser = async (req, res) => {
+  try {
+    //get otp from body
+    const { otp } = req.body;
+
+    //find otp of user in db and compare
+    const user = await User.findOne({ otp });
+
+    //throw if the user is not found
+    if (!user) {
+      return res.status(400).json({
+        message: "wrong otp was inputted",
+      });
+    }
+
+    //update is_verified field
+    user.is_verified = true;
+
+    // save the update to db
+    await user.save();
+
+    return res.status(200).json({
+      message: "user has been verified successfully",
+      user,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
+export const forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    const token = jwt.sign({ email }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+
+    const reset_url = `http://localhost:4150/auth/reset_password?token=${token}`;
+
+    const isEmailSent = await sendEmail({
+      to: email,
+      subject: "Reset Password Notifcation",
+      type: "resetPassword",
+      data: { resetUrl: reset_url },
+    });
+
+    if (isEmailSent) {
+      return res.status(200).json({
+        message: "A reset link has been sent to your email",
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
 };
 
 // export const createUserWithValidation = async (req, res) => {

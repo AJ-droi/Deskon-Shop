@@ -19,7 +19,7 @@ export const registerUser = async (req, res) => {
     }
 
     const { first_name, last_name, email, password } = value; // got input ffrom the user
-    console.log("hello");
+
     //check for old users
     const oldUser = await User.findOne({ email });
     if (oldUser) {
@@ -28,7 +28,6 @@ export const registerUser = async (req, res) => {
       });
     }
 
-    console.log("hello");
     const salt = await bcrypt.genSalt();
 
     //enrypt my password
@@ -37,25 +36,41 @@ export const registerUser = async (req, res) => {
     // generate otp
     const otp = otpGenerator.generate(6, {
       upperCaseAlphabets: false,
+      lowerCaseAlphabets: false,
       specialChars: false,
+      number: true,
     });
 
-    const newUser = await User.create({
-      first_name,
-      last_name,
-      email,
-      password: hashedPassword,
-      otp,
+    const isEmailSent = await sendEmail({
+      to: email,
+      subject: "Otp notification",
+      type: "otp",
+      data: otp,
     });
 
+    if (!isEmailSent) {
+      return res.status(500).json({
+        message: "Email not sent"
+      })
+    }
+
+
+      const newUser = await User.create({
+        first_name,
+        last_name,
+        email,
+        otp,
+        password: hashedPassword,
+      });
+
+      return res.status(201).json({
+        message:
+          "user created successfully, check your email to get your otp verification"
+      });
+  
     // send email
-    await sendEmail(email, otp);
-
-    return res.status(201).json({
-      message:
-        "user created successfully, check your email to get your otp verification",
-      newUser,
-    });
+    // await sendEmail(email, otp);
+    // const isEmailSent = await sendEmail(email, otp);
   } catch (error) {
     return res.status(500).json({
       message: error.message,
@@ -167,13 +182,13 @@ export const forgotPassword = async (req, res) => {
       expiresIn: "1h",
     });
 
-    const reset_url = `http://localhost:4150/auth/reset_password?token=${token}`;
+    const reset_url = `http://localhost:4150/auth/reset-password?token=${token}`;
 
     const isEmailSent = await sendEmail({
       to: email,
       subject: "Reset Password Notifcation",
       type: "resetPassword",
-      data: { resetUrl: reset_url },
+      data: reset_url,
     });
 
     if (isEmailSent) {
@@ -181,6 +196,41 @@ export const forgotPassword = async (req, res) => {
         message: "A reset link has been sent to your email",
       });
     }
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
+export const resetPassword = async (req, res) => {
+  try {
+    // get new password from user
+    const { new_password } = req.body;
+
+     const salt = await bcrypt.genSalt();
+
+    // hash the new password
+    const hashedPassword = await bcrypt.hash(new_password, salt);
+
+    // verify reset token
+    const verify = jwt.verify(req.query.token, process.env.JWT_SECRET);
+
+    //update the user data with new password
+    const user = await User.findOne({ email: verify.email });
+
+    if (!user) {
+      return res.status(400).json({
+        message: "user information not found",
+      });
+    }
+
+    user.password = hashedPassword;
+    user.save();
+
+    return res.status(200).json({
+      message: "password has been reset successfully",
+    });
   } catch (error) {
     return res.status(500).json({
       message: error.message,

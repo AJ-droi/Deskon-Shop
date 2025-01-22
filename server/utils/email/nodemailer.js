@@ -24,15 +24,15 @@ export const sendEmail = async ({to, subject, type, data}) => {
 
   switch (type) {
     case "otp":
-      emailContent = `<p>Your OTP code is: <strong>${data.otp}</strong></p>`;
+      emailContent = `<p>Your OTP code is: <strong>${data}</strong></p>`;
       break;
 
     case "resetPassword":
-      emailContent = `<p>Click <a href="${data.resetUrl}">here</a> to reset your password.</p>`;
+      emailContent = `<p>Click <a href="${data}">here</a> to reset your password.</p>`;
       break;
 
     case "general":
-      emailContent = `<p>${data.content}</p>`;
+      emailContent = `<p>${data}</p>`;
       break;
 
     default:

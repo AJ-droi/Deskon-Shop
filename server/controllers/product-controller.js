@@ -1,7 +1,8 @@
 import Category from "../models/category.model.js";
 import Product from "../models/product.model.js";
-import { categorySchema } from "../utils/validator/category.validator.js";
+import { categorySchema, updateCategorySchema } from "../utils/validator/category.validator.js";
 import { productSchema, updateProductSchema } from "../utils/validator/product.validator.js";
+
 
 export const createCategory= async(req, res) => {
   try{
@@ -28,8 +29,41 @@ export const createCategory= async(req, res) => {
     })
   }
 }
+
+export const updateCategory = async(req, res) => {
+   try {
+     const { id } = req.params;
+
+     const { error, value } = updateCategorySchema.validate(req.body, {
+       abortEarly: false,
+     });
+
+     if (error) {
+       const errorMessages = error.details.map((detail) => detail.message);
+       throw new Error(errorMessages.join(", "));
+     }
+
+     const updateCategory = await Category.findByIdAndUpdate(id,
+       {
+         ...value,
+       },
+       { new: true }
+     );
+
+     
+
+     return res.status(200).json({
+       updateCategory,
+     });
+   } catch (error) {
+     return res.status(500).json({
+       message: error.message,
+     });
+   }
+}
 export const addProduct = async(req, res) => {
   try{
+  
     const {error, value} = productSchema.validate(req.body, {abortEarly: false})
 
      if (error) {
@@ -37,13 +71,22 @@ export const addProduct = async(req, res) => {
        throw new Error(errorMessages.join(", "));
      }
 
-     const {name, price, stock, imageUrl, category} = value
+     const {name, price, stock, category} = value
+
+     if(!req.file){
+       return res
+         .status(400)
+         .json({ message: "Error parsing form data", error: err.message });
+     }
+
+    //  const cloudinary_url = await uploadFiles(req.file, name)
+// console.log(req.file)
 
      const product = await Product.create({
        name,
        price,
        stock,
-       imageUrl,
+       imageUrl: req.file.path,
        category
      });
 
@@ -97,6 +140,29 @@ export const updateProduct = async(req,res) =>{
 
 
     }catch(error){
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+}
+
+export const deleteProduct = async(req, res) => {
+  try {
+    const {id} = req.params
+
+    const deleteProduct = await Product.findByIdAndDelete(id);
+
+    if (!deleteProduct) {
+      return res.status(404).json({
+        message: "Product does not exists",
+      });
+    }
+
+    return res.status(200).json({
+      message: "Product deleted successfully",
+    });
+
+  } catch (error) {
     return res.status(500).json({
       message: error.message,
     });

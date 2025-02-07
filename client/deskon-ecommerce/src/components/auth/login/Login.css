@@ -63,6 +63,9 @@
   border: 1px solid black;
   background: transparent;
   transition: all 0.2s ease;
+}
+
+.login > form > .ire > .enter input:focus {
   background: transparent;
 }
 
@@ -76,6 +79,7 @@
 
 .login > form > .ire > .enter input:valid {
   border: 1px solid black;
+  background: transparent;
 }
 
 .login > form > .ire > .enter span {
@@ -97,18 +101,18 @@
   top: 10px;
   transition: all 300ms ease, color 300ms;
   pointer-events: none;
-  background: rgb(226, 223, 223);
+  background: white;
   position: absolute;
   left: var(--x);
   top: var(--y);
-  padding: 3px;
+  padding: 1px;
   margin: 0;
 }
 
 .login > form > .ire > .enter input:is(:focus, :not(:placeholder-shown)) ~ label {
   top: -23px;
   color: black;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
 }
 .login > form .click {
   display: flex;

@@ -53,7 +53,7 @@
 .login > form > .ire > .enter {
   position: relative;
   --x: 15px;
-  --y: 10px;
+  --y: 14px;
 }
 
 .login > form > .ire > .enter input {
@@ -63,10 +63,6 @@
   border: 1px solid black;
   background: transparent;
   transition: all 0.2s ease;
-}
-
-.login > form > .ire > .enter input:focus {
-  background: transparent;
 }
 
 .login > form > .ire > .enter input:not(:focus):invalid {
@@ -97,8 +93,6 @@
   font-size: 1.2rem;
   font-weight: 600;
   position: absolute;
-  left: 10px;
-  top: 10px;
   transition: all 300ms ease, color 300ms;
   pointer-events: none;
   background: white;
@@ -110,7 +104,7 @@
 }
 
 .login > form > .ire > .enter input:is(:focus, :not(:placeholder-shown)) ~ label {
-  top: -23px;
+  top: -22px;
   color: black;
   font-size: 1.5rem;
 }

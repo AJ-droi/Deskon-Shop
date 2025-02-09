@@ -89,7 +89,7 @@ const LoginComponent = () => {
 
           <p>OR</p>
 
-          <a href="/Html Pages/activate-email.html">
+          <a href="#">
             <button type="button">Sign up with Google</button>
           </a>
 

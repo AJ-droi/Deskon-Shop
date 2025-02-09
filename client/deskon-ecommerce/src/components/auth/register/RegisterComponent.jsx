@@ -1,5 +1,9 @@
+// import { useState } from "react";
+import "./Register.css"
+
+
 const RegisterComponent = () => {
-    const styles = { backgroundImage: "url(../Images/family.psd)" };
+  const styles = { backgroundImage: "url(../Images/family.psd)" };
   return (
     <div style={styles}>
       <div className="login">
@@ -62,23 +66,23 @@ const RegisterComponent = () => {
             <p>Forgotten password?</p>
           </div>
 
-          <a href="/Html Pages/homepage.html">
+          <a href="#">
             <button type="button">Login</button>
           </a>
 
           <p>OR</p>
 
-          <a href="/Html Pages/activate-email.html">
+          <a href="#">
             <button type="button">Sign up with Google</button>
           </a>
 
-          <a href="/Html Pages/registration.html">
+          <a href="#">
             <button type="button">Sign up with Email Address</button>
           </a>
         </form>
       </div>
     </div>
   );
-}
+};
 
-export default RegisterComponent
+export default RegisterComponent;

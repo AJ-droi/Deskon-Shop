@@ -1,15 +1,49 @@
-// import { useState } from "react";
+import { useState } from "react";
 import "./Register.css"
 
 
 const RegisterComponent = () => {
   const styles = { backgroundImage: "url(../Images/family.psd)" };
+
+   const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [first_name, setFirstname] = useState("");
+    const [last_name, setLastname] = useState("");
+
+  
+    const handleRegistration = async (e) => {
+      e.preventDefault()
+      try {
+        const response = await fetch("http://localhost:4100/auth/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+  
+          body: JSON.stringify({ email, password, first_name,last_name }),
+        });
+        // const response = await axios.post(`http://localhost:4100/auth/login`, {
+        //   email,
+        //   password,
+        // });
+  
+        const result = await response.json();
+        console.log(result);
+  
+      
+  
+        // alert(`${result}`);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
   return (
     <div style={styles}>
       <div className="login">
         <h1>Create your account</h1>
 
-        <form action="">
+        <form onSubmit={handleRegistration}>
           <div className="ire">
             <div className="enter">
               <input

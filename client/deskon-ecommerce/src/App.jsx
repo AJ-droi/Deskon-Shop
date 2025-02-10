@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/auth/Login.jsx";
 import Register from "./pages/auth/Register.jsx";
+import OtpInput from "./pages/auth/Otp.jsx";
+import ForgotPassword from "./pages/auth/ForgotPassword.jsx";
 
 
 function App() {
@@ -16,6 +18,8 @@ function App() {
           <Route path="auth">
             <Route path="login" element={<Login />}></Route>
             <Route path="register" element={<Register />}></Route>
+            <Route path="otp" element={<OtpInput />}></Route>
+            <Route path="forgot-password" element={<ForgotPassword />}></Route>
           </Route>
         </Routes>
       </Router>

@@ -30,7 +30,7 @@ const LoginComponent = () => {
 
     
 
-      // alert(`${result}`);
+      alert(result.message);
     } catch (error) {
       console.log(error);
     }
@@ -81,8 +81,9 @@ const LoginComponent = () => {
               <input type="checkbox" name="checkbox" id="checkbox"></input>
               <p>Remember password</p>
             </div>
-
-            <p>Forgotten password?</p>
+            <Link to="/auth/forgot-password">
+              <p>Forgotten password?</p>
+            </Link>
           </div>
 
           <button type="submit">Login</button>
@@ -93,7 +94,7 @@ const LoginComponent = () => {
             <button type="button">Sign up with Google</button>
           </a>
 
-          <Link to="/register">
+          <Link to="/auth/register">
             <button type="button">Sign up with Email Address</button>
           </Link>
         </form>

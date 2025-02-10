@@ -1,16 +1,31 @@
 import { useState } from "react";
 import "./Register.css"
+import { useNavigate} from "react-router-dom";
 
 
 const RegisterComponent = () => {
   const styles = { backgroundImage: "url(../Images/family.psd)" };
+  const navigate = useNavigate()
 
-   const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [first_name, setFirstname] = useState("");
-    const [last_name, setLastname] = useState("");
+  //  const [email, setEmail] = useState("");
+  //   const [password, setPassword] = useState("");
+  //   const [first_name, setFirstname] = useState("");
+  //   const [last_name, setLastname] = useState("");
 
-  
+    const [formData, setFormData] = useState({
+      first_name:"",
+      last_name:"",
+      email:"",
+      password:""
+    })
+
+  const handleChange = (e) => {
+    const {name, value} = e.target
+console.log('before', formData)
+    setFormData({...formData, [name]:value})
+    console.log(formData)
+  }
+
     const handleRegistration = async (e) => {
       e.preventDefault()
       try {
@@ -20,7 +35,7 @@ const RegisterComponent = () => {
             "Content-Type": "application/json",
           },
   
-          body: JSON.stringify({ email, password, first_name,last_name }),
+          body: JSON.stringify(formData),
         });
         // const response = await axios.post(`http://localhost:4100/auth/login`, {
         //   email,
@@ -28,11 +43,13 @@ const RegisterComponent = () => {
         // });
   
         const result = await response.json();
-        console.log(result);
   
-      
-  
-        // alert(`${result}`);
+        if(result){
+          alert(`${result.message}`);
+          navigate("/auth/otp");
+        }
+        
+        
       } catch (error) {
         console.log(error);
       }
@@ -51,6 +68,7 @@ const RegisterComponent = () => {
                 name="first_name"
                 id="email"
                 placeholder="First Name"
+                onChange={handleChange}
               ></input>
               {/* <span>Invalid email address</span> */}
               <label>First Name</label>
@@ -62,6 +80,7 @@ const RegisterComponent = () => {
                 name="last_name"
                 id="email"
                 placeholder="Last Name"
+                onChange={handleChange}
               ></input>
               {/* <span>Invalid email address</span> */}
               <label>Last Name</label>
@@ -70,9 +89,10 @@ const RegisterComponent = () => {
             <div className="enter">
               <input
                 type="email"
-                name="checkbox"
+                name="email"
                 id="email"
                 placeholder=""
+                onChange={handleChange}
               ></input>
               {/* <span>Invalid email address</span> */}
               <label>Email</label>
@@ -81,10 +101,11 @@ const RegisterComponent = () => {
             <div className="enter">
               <input
                 type="password"
-                name="checkbox"
+                name="password"
                 id="password"
                 placeholder=""
                 pattern="[a-z0-9]{8,}"
+                onChange={handleChange}
               ></input>
               {/* <span>Digits or letters, minimum of 8 characters</span> */}
               <label>Password</label>
@@ -100,9 +121,7 @@ const RegisterComponent = () => {
             <p>Forgotten password?</p>
           </div>
 
-          <a href="#">
-            <button type="button">Login</button>
-          </a>
+          <button type="submit">Register</button>
 
           <p>OR</p>
 

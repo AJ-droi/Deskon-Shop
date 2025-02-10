@@ -296,6 +296,7 @@
   row-gap: 10%;
   margin: 5% 0 0 0;
   padding: 0 4%;
+  text-align: center;
 }
 
 .item-categories > .item-category {
@@ -307,12 +308,21 @@
   width: 100%;
 }
 
+.item-category > p {
+  text-align: center;
+}
+
 .item-category > h4 {
   font-family: "Poppins", serif;
   font-weight: 500;
   font-style: normal;
   font-size: 1.2rem;
   text-align: center;
+}
+
+.see-more {
+  border-radius: 50%;
+  border: 2px solid red;
 }
 
 .category-sec > button {
@@ -325,7 +335,7 @@
   padding: 1%;
   border-radius: 5px;
   border: none;
-  background-color: grey;
+  background-color: rgb(148, 146, 146);
   color: white;
   margin: 7% auto 0 auto;
 }

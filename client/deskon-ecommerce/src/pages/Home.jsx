@@ -1,6 +1,6 @@
 // import ImageUploading from "react-images-uploading";
 import "./Home.css";
-import React, { useState } from "react";
+import { useState } from "react";
 // import Login from "./auth/Login";
 
 const Home = () => {
@@ -199,11 +199,17 @@ const Section =() => {
 // Category section
 const Section2 = () => {
   const styles = {fontFamily: "Poppins", fontWeight: "500", fontStyle: "normal", fontSize: "2rem", paddingBottom: "", backgroundColor: "grey", color: "white"}
+  const seeMore = {
+    fontFamily: "Poppins",
+    fontWeight: "500",
+    backgroundColor: "rgb(148, 146, 146)",
+    color: "white",
+    borderRadius: "50%",
+    height: "90%",
+  };
   return (
     <div className="category-sec">
-      <h2 
-        style={styles}>Categories
-      </h2>
+      <h2 style={styles}>Categories</h2>
       <div className="item-categories">
         <div className="item-category">
           <img src="./Images/man.png" alt="" />
@@ -233,12 +239,15 @@ const Section2 = () => {
           <img src="./Images/drinks2.png" alt="" />
           <h4>Beverages</h4>
         </div>
-        <div className="item-category">
-          <img src="./Images/health4.png" alt="" />
-          <h4>Health</h4>
+        <div className="item-category" style={seeMore}>
+          <h4 style={{ margin: "40% 0", fontSize: "1.5rem" }}>See More</h4>
+
+          {/* <img src="./Images/health4.png" alt="" />
+          <h4>Health</h4> */}
+          {/* <p>See More</p> */}
         </div>
       </div>
-      <button>See more</button>
+      {/* <button>See more</button> */}
     </div>
   );
 }

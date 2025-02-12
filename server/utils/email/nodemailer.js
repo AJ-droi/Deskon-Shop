@@ -28,7 +28,7 @@ export const sendEmail = async ({to, subject, type, data}) => {
       break;
 
     case "resetPassword":
-      emailContent = `<p>Click <a href="${data}">here</a> to reset your password.</p>`;
+      emailContent = `<p>Click <a href="${data}" target="_blank">here</a> to reset your password.</p>`;
       break;
 
     case "general":

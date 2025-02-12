@@ -1,27 +1,32 @@
+import { useSearchParams } from "react-router-dom";
 import "../login/Login.css";
 import { useState } from "react";
 // import axios from 'axios'
 
-const ForgotPasswordComponent = () => {
+const ResetPasswordComponent = () => {
   const styles = { backgroundImage: "url(../Images/family.psd)" };
 
-  const [email, setEmail] = useState("");
+  const [newPassword, setNewPassword] = useState("");
   const [loading, setLoading] = useState(false)
+
+  const [searchParams] = useSearchParams();
+
+const token = searchParams.get('token')
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       setLoading(true)
-      const response = await fetch("http://localhost:4100/auth/forgot-password", {
+      const response = await fetch(`http://localhost:4100/auth/reset-password?token=${token}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
 
-        body: JSON.stringify({ email, }),
+        body: JSON.stringify({ new_password: newPassword }),
       });
       // const response = await axios.post(`http://localhost:4100/auth/login`, {
-      //   email,
+      //   new_password,
       //   password,
       // });
 
@@ -40,24 +45,24 @@ const ForgotPasswordComponent = () => {
   return (
     <div style={styles}>
       <div className="login">
-        <h1>Forgot Password</h1>
+        <h1>Reset Password</h1>
         {/* <p style={{backgroundColor:"red", padding:"5%"}}>{ name=== "prechi" ? 'yay prechi' : ' not prechi'}</p> */}
 
         <form onSubmit={handleSubmit}>
           <div className="ire">
             <div className="enter">
               <input
-                type="email"
-                name="email"
-                id="email"
+                type="password"
+                name="new_password"
+                id="new_password"
                 placeholder=""
-                value={email}
+                value={newPassword}
                 onChange={(e) => {
-                  setEmail(e.target.value);
+                  setNewPassword(e.target.value);
                 }}
               ></input>
               <span>Invalid email address</span>
-              <label>Email</label>
+              <label>New Password</label>
             </div>
 
           </div>
@@ -72,4 +77,4 @@ const ForgotPasswordComponent = () => {
   );
 };
 
-export default ForgotPasswordComponent;
+export default ResetPasswordComponent;

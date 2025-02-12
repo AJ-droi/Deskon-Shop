@@ -8,7 +8,7 @@ const router = express.Router();
 router.post("/add-product", upload.single('imageUrl'), Product.addProduct);
 router.post("/add-category", Product.createCategory);
 router.post("/update-category", Product.updateCategory);
-router.get("/all", isAdmin, Product.getAllProducts);
+router.get("/all", Product.getAllProducts);
 router.patch("/update/:id", Product.updateProduct);
 router.delete("/delete/:id", Product.deleteProduct);
 

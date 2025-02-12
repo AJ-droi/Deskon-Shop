@@ -1,3 +1,5 @@
+import { ProductSection } from "./SectionComponent";
+
 export const Section2 = () => {
   const styles = {
     fontFamily: "Poppins",
@@ -20,7 +22,12 @@ export const Section2 = () => {
   };
   return (
     <article className="category-sec">
+
       <h2 style={styles}>Categories</h2>
+      <ProductSection data={[{
+        name:"jane",
+        price:"100",
+}]}/>
       <article className="item-categories">
         <div className="item-category">
           <img src="./Images/man.png" alt="" />

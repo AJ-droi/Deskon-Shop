@@ -82,7 +82,7 @@ const LoginComponent = () => {
               <input type="checkbox" name="checkbox" id="checkbox"></input>
               <p>Remember password</p>
             </div>
-            <Link to="/auth/forgot-password">
+            <Link to="/auth/forgot-password" className="link">
               <p>Forgotten password?</p>
             </Link>
           </div>

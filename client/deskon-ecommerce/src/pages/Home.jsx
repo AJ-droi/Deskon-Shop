@@ -13,6 +13,7 @@ import { Banner } from "../components/HomeComponents/BannerComponent";
 import { Fashion } from "../components/HomeComponents/FashionComponent";
 import { Trending } from "../components/HomeComponents/TrendingComponent";
 import { Brand } from "../components/HomeComponents/BrandComponent";
+import { ProductPage } from "../components/ProductComponents/ProductPage";
 
 const Home = () => {
   return (
@@ -25,6 +26,7 @@ const Home = () => {
       <Fashion />
       <Trending />
       <Brand />
+      <ProductPage />
     </div>
   );
 };

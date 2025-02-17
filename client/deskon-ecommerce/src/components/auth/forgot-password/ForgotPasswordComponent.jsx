@@ -3,7 +3,6 @@ import { useState } from "react";
 // import axios from 'axios'
 
 const ForgotPasswordComponent = () => {
-  const styles = { backgroundImage: "url(../Images/family.psd)" };
 
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false)
@@ -38,7 +37,7 @@ const ForgotPasswordComponent = () => {
   };
 
   return (
-    <div style={styles}>
+    <div style={""}>
       <div className="login">
         <h1>Forgot Password</h1>
         {/* <p style={{backgroundColor:"red", padding:"5%"}}>{ name=== "prechi" ? 'yay prechi' : ' not prechi'}</p> */}

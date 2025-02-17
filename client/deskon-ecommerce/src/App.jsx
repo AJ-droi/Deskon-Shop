@@ -8,7 +8,8 @@ import Register from "./pages/auth/Register.jsx";
 import OtpInput from "./pages/auth/Otp.jsx";
 import ForgotPassword from "./pages/auth/ForgotPassword.jsx";
 import ResetPassword from "./pages/auth/ResetPassword.jsx";
-
+import Product from "./pages/product/Product.jsx";
+import AddProduct from "./pages/product/AddProduct.jsx";
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
             <Route path="forgot-password" element={<ForgotPassword />}></Route>
             <Route path="reset-password" element={<ResetPassword />}></Route>
           </Route>
+          <Route path="products" element={<Product />}></Route>
+          <Route path="add-products" element={<AddProduct />}></Route>
         </Routes>
       </Router>
 
@@ -53,7 +56,5 @@ function App() {
     </div>
   );
 }
-
-
 
 export default App;

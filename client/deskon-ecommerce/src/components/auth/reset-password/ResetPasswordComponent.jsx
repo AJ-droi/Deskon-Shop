@@ -1,10 +1,10 @@
-import { useSearchParams } from "react-router-dom";
 import "../login/Login.css";
+import { useSearchParams } from "react-router-dom";
 import { useState } from "react";
 // import axios from 'axios'
 
 const ResetPasswordComponent = () => {
-  const styles = { backgroundImage: "url(../Images/family.psd)" };
+  // const styles = { backgroundImage: "url(../Images/family.psd)" };
 
   const [newPassword, setNewPassword] = useState("");
   const [loading, setLoading] = useState(false)
@@ -43,7 +43,7 @@ const token = searchParams.get('token')
   };
 
   return (
-    <div style={styles}>
+    <div style={""}>
       <div className="login">
         <h1>Reset Password</h1>
         {/* <p style={{backgroundColor:"red", padding:"5%"}}>{ name=== "prechi" ? 'yay prechi' : ' not prechi'}</p> */}

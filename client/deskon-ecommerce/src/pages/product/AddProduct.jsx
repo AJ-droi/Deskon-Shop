@@ -31,7 +31,7 @@ const AddProduct = () => {
       );
 
       const result = await response.json();
-      console.log({result})
+      console.log({result});
       alert(result.message);
       navigate("/add-products");
     } catch (error) {

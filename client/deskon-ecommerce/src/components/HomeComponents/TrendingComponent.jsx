@@ -13,7 +13,7 @@ export const Trending = () => {
     <article className="trending">
       <h2 style={styles}>Top Trending</h2>
       <article className="trending-container">
-        <di className="trending-child">
+        <div className="trending-child">
           <img src="./Images/laptop-stand.jpg" alt="" />
           <div className="cart">
             <span style={{ width: "100%" }}>
@@ -35,7 +35,7 @@ export const Trending = () => {
               <img src="./Icons/cart.svg" alt="" style={{ width: "40%" }} />
             </span>
           </div>
-        </di>
+        </div>
 
         <div className="trending-child">
           <img src="./Images/power-bank.jpg" alt="" />

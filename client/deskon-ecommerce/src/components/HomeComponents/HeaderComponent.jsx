@@ -1,6 +1,6 @@
-// import "Home.css";
 import { useState } from "react";
 import "react-multi-carousel/lib/styles.css";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   const [openDropDown, setOpenDropDown] = useState(false);
@@ -59,7 +59,7 @@ export const Header = () => {
         <ul className="nav-items">
           <li>Home</li>
           <li>Brand</li>
-          <li>Shopping</li>
+          <li><Link to="/products">Products</Link></li>
           <li>New Arrivals</li>
           <li>Blog</li>
           <li>Contact</li>

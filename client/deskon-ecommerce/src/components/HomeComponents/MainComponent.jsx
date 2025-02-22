@@ -1,3 +1,5 @@
+import "../StylesComponents/Main.css";
+
 export const Main = () => {
   // const style ={color: 'red', fontSize: '48px', textTransform: 'upperCase'}
   return (

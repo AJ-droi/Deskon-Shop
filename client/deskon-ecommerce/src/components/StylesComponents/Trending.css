@@ -1,0 +1,28 @@
+.trending-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  /* justify-content: center;
+  align-items: center; */
+  gap: 10%;
+  padding: 5% 7%;
+  width: 100%;
+}
+
+.trending-child {
+  width: 100%;
+}
+
+.trending-child img {
+  width: 100%;
+}
+
+.cart {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 10%;
+}
+
+.cart img {
+  text-align: end;
+}

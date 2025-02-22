@@ -1,0 +1,48 @@
+.fashion {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  /* gap: 4%; */
+  width: 100%;
+  margin: 6% 0;
+}
+
+.fashion-left {
+  width: 100%;
+  text-align: end;
+}
+
+.fashion-left img {
+  width: 63%;
+  background-color: rgb(196, 194, 194);
+  justify-content: space-between;
+}
+
+.fashion-middle {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto;
+  /* row-gap: 5%; */
+  /* background-color: red; */
+}
+
+.fashion-middle .bottom{
+  margin-top: 5%;
+}
+
+.fashion-middle img {
+  width: 33%;
+  background-color: rgb(196, 194, 194);
+}
+
+.fashion-right {
+  width: 100%;
+  text-align: start;
+}
+
+.fashion-right img {
+  width: 56%;
+  background-color: rgb(196, 194, 194);
+}

@@ -12,6 +12,8 @@ const LoginComponent = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+         if (email || password === "") navigate("/auth/Login");
     try {
       const response = await fetch("http://localhost:4100/auth/login", {
         method: "POST",
@@ -27,8 +29,12 @@ const LoginComponent = () => {
       // });
 
       const result = await response.json();
+
+      localStorage.setItem('role', result.user.role)
+
       navigate('/');
 
+ 
     
 
       alert(result.message);

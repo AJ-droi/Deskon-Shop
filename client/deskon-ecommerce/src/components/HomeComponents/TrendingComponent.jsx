@@ -1,3 +1,5 @@
+import "../StylesComponents/Trending.css";
+
 export const Trending = () => {
   const styles = {
     fontFamily: "Poppins",

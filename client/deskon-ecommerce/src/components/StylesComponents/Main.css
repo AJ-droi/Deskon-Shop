@@ -1,0 +1,47 @@
+/* First homepage section */
+.main {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 2%;
+  width: 100%;
+  height: 80vh;
+  background: linear-gradient(white, gray);
+}
+
+.main-text {
+  padding-left: 2%;
+  width: 50%;
+  color: black;
+}
+
+.main-text h1 {
+  font-family: "Poppins", serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 3.5rem;
+  text-align: start;
+}
+
+.main-text > button {
+  font-family: "Poppins", serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 1.2rem;
+  margin-top: 5%;
+  padding: 2%;
+  width: 20%;
+  border-radius: 5px;
+  border: none;
+  background-color: red;
+  color: white;
+}
+
+.main-image {
+  width: 49%;
+}
+
+.main-image > img {
+  width: 100%;
+  text-align: center;
+}

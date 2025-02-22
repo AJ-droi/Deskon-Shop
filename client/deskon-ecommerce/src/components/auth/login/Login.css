@@ -56,7 +56,7 @@
   --y: 14px;
 }
 
-.login > form > .ire > .enter input {
+.login > form > .ire > .enter input, #category {
   width: 100%;
   padding: 1rem;
   font-size: 1rem;
@@ -65,7 +65,7 @@
   transition: all 0.2s ease;
 }
 
-.login > form > .ire > .enter input:not(:focus):invalid {
+.login > form > .ire > .enter input, #category:not(:focus):invalid {
   border: 1px solid red;
 }
 

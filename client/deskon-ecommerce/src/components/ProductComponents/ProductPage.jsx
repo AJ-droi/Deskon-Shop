@@ -18,7 +18,7 @@ export const ProductPage = () => {
 
         setProducts(result.products);
       } catch (error) {
-        alert(error.message);;
+        alert(error.message);
       }
     };
 

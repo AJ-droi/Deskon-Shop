@@ -1,10 +1,18 @@
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+// import React from "react";
 // import axios from 'axios'
 
 const LoginComponent = () => {
-  const styles = { backgroundImage: "url(../Images/family.psd)" };
+  const styles = {
+    // backgroundImage: "url(/Images/222222222222222222222.jpg)",
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    width: "100%",
+    height: "100vh"
+  };
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

@@ -90,12 +90,12 @@ export const Header = () => {
 
           {openDropDown && (
             <div className="list-items">
-              <li>Fashion</li>
-              <li>Electronics</li>
-              <li>Beverages</li>
-              <li>Food</li>
-              <li>Toys</li>
-              <li>Health</li>
+              <libhhhds>Fashion</libhhhds>
+              <libhhhds>Electronics</libhhhds>
+              <libhhhds>Beverages</libhhhds>
+              <libhhhds>Food</libhhhds>
+              <libhhhds>Toys</libhhhds>
+              <libhhhds>Health</libhhhds>
             </div>
           )}
         </ul>

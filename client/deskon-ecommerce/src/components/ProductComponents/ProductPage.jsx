@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import "../ProductComponents/Product.css";
 import { useEffect, useState } from "react";
@@ -99,48 +100,54 @@ export const ProductSection = (props) => {
     padding: "7%",
   };
 
-  const { addToCart, getCart } = useCartStore();
+  const { addToCart, getCart, changeQuantity, removeFromCart } = useCartStore();
 
   console.log({ cartInfo: getCart() });
+
+  const cart = getCart().cart; // Fetch the latest cart state
 
   return (
     <div className="gadget-children" style={myStyles}>
       {data ? (
-        // eslint-disable-next-line react/prop-types
-        data?.map((item, index) => (
-          <div className="gadget" key={index}>
-            <div className="buy-gadget">
-              <img src="./Icons/heart-fill.svg" alt="" />
-              <span onClick={() => addToCart(item)}>
-                Add to cart <img src="./Icons/cart.svg" alt="" />
-              </span>
-            </div>
-            <div className="gadget-item">
-              <img src={item.imageUrl} alt={item.name} />
-            </div>
-            <div className="gadget-price">
-              <h4>{item.name}</h4>
-              <button>${item.price}</button>
-            </div>
-          </div>
-        ))
-      ) : (
-        <p> No Products Available</p>
-      )}
+        data.map((item, index) => {
+          const cartItem = cart.find((cartItem) => cartItem._id === item._id);
+          const quantity = cartItem ? cartItem.quantity : 0; // Get quantity from cart state
 
-      <div className="gadget">
-        <div className="buy-gadget">
-          <img src="./Icons/heart-fill.svg" alt="" />
-          <p>Buy now</p>
-        </div>
-        <div className="gadget-item">
-          <img src="./Images/laptop-stand.jpg" alt="" />
-        </div>
-        <div className="gadget-price">
-          <h4>Phone</h4>
-          <button>$20.40</button>
-        </div>
-      </div>
+          return (
+            <div className="gadget" key={index}>
+              <div className="buy-gadget">
+                <img src="./Icons/heart-fill.svg" alt="" />
+                <span onClick={() => addToCart(item)}>
+                  Add to cart <img src="./Icons/cart.svg" alt="" />
+                </span>
+
+                <span onClick={() => removeFromCart(item)}>
+                  Remove from cart <img src="./Icons/cart.svg" alt="" />
+                </span>
+              </div>
+              <div className="gadget-item">
+                <img src={item.imageUrl} alt={item.name} />
+              </div>
+              <div className="gadget-price">
+                <h4>{item.name}</h4>
+                <button>${item.price}</button>
+              </div>
+              <div className="gadget-price">
+                <button
+                  onClick={() => quantity > 0 && changeQuantity(item, -1)}
+                  disabled={quantity === 0}
+                >
+                  -
+                </button>
+                <h4>{quantity}</h4>
+                <button onClick={() => changeQuantity(item, 1)}>+</button>
+              </div>
+            </div>
+          );
+        })
+      ) : (
+        <p>No Products Available</p>
+      )}
     </div>
   );
 };

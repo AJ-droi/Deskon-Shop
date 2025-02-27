@@ -1,3 +1,4 @@
+import "../StylesComponents/Header.css"
 import { useState } from "react";
 import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
@@ -7,6 +8,28 @@ export const Header = () => {
   const toggleDropDown = () => {
     setOpenDropDown(!openDropDown);
   };
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
+
+  const handleMouseEnter = () => {
+    setDropdownVisible(true);
+  };
+
+  const handleMouseLeave = () => {
+    setDropdownVisible(false);
+  };
+
+  const root = { width: "7%", inset: "5% 0 0 86%", textAlign: "center", position: "absolute" }
+  const rootImage = { width: "33%", position: "relative", inset: "0 0 0 -45%" };
+  const rootSpan = {zIndex: "99", position: "absolute", inset: "4.7% 0 0 -35%"}
+  const rootList = {
+    listStyle: "none",
+    display: "",
+    width: " 65%",
+    textAlign: "start",
+    boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+    cursor: "pointer"
+  };
+  const rootLi = {padding: "4% 0 4% 10%"}
   return (
     // First navbar
     <nav>
@@ -26,8 +49,29 @@ export const Header = () => {
           </button>
         </div>
         <div className="nav-icons">
+          <div style={root}>
+            <img
+              src="./Icons/user.svg"
+              alt="User"
+              style={rootImage}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            />
+            {isDropdownVisible && (
+              <span style={rootSpan}>
+                <ul
+                  style={rootList}
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <li style={rootLi}>Profile</li>
+                  <hr />
+                  <li style={rootLi}>Logout</li>
+                </ul>
+              </span>
+            )}
+          </div>
           <img src="./Icons/heart-fill.svg" alt="Favourite" />
-          <img src="./Icons/user.svg" alt="User" />
           <img src="./Icons/cart.svg" alt="Cart" />
         </div>
       </div>
@@ -46,12 +90,12 @@ export const Header = () => {
 
           {openDropDown && (
             <div className="list-items">
-              <li>Fashion</li>
-              <li>Electronics</li>
-              <li>Beverages</li>
-              <li>Food</li>
-              <li>Toys</li>
-              <li>Health</li>
+              <libhhhds>Fashion</libhhhds>
+              <libhhhds>Electronics</libhhhds>
+              <libhhhds>Beverages</libhhhds>
+              <libhhhds>Food</libhhhds>
+              <libhhhds>Toys</libhhhds>
+              <libhhhds>Health</libhhhds>
             </div>
           )}
         </ul>
@@ -59,7 +103,9 @@ export const Header = () => {
         <ul className="nav-items">
           <li>Home</li>
           <li>Brand</li>
-          <li><Link to="/products">Products</Link></li>
+          <li>
+            <Link to="/products">Products</Link>
+          </li>
           <li>New Arrivals</li>
           <li>Blog</li>
           <li>Contact</li>

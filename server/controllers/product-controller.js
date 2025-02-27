@@ -1,13 +1,7 @@
 import Category from "../models/category.model.js";
 import Product from "../models/product.model.js";
-import {
-  categorySchema,
-  updateCategorySchema,
-} from "../utils/validator/category.validator.js";
-import {
-  productSchema,
-  updateProductSchema,
-} from "../utils/validator/product.validator.js";
+import { categorySchema, updateCategorySchema,} from "../utils/validator/category.validator.js";
+import { productSchema, updateProductSchema,} from "../utils/validator/product.validator.js";
 
 export const createCategory = async (req, res) => {
   try {
@@ -78,12 +72,10 @@ export const addProduct = async (req, res) => {
     const { name, price, stock, category } = value;
 
     if (!req.file) {
-      return res
-        .status(400)
-        .json({ message: "imageUrl is required" });
+      return res.status(400).json({ message: "imageUrl is required" });
     }
 
-      console.log(req.body);
+    console.log(req.body);
 
     //  const cloudinary_url = await uploadFiles(req.file, name)
     // console.log(req.file)
@@ -97,7 +89,7 @@ export const addProduct = async (req, res) => {
     });
 
     return res.status(200).json({
-      message:"product added successfully"
+      message: "product added successfully",
     });
   } catch (error) {
     return res.status(500).json({

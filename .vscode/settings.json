@@ -1,0 +1,17 @@
+{
+  "auto-close-tag.SublimeText3Mode": true,
+  "editor.colorDecoratorsLimit": 5000,
+  "workbench.colorTheme": "Monokai Pro (Filter Spectrum)",
+  "workbench.preferredDarkColorTheme": "Mono Atom",
+  "importCost.largePackageDarkColor": "#d44e40",
+  "importCost.bundleSizeColoring": "minified",
+  "importCost.largePackageLightColor": "#d44e40",
+  "importCost.mediumPackageDarkColor": "#7cc36e",
+  "importCost.mediumPackageLightColor": "#7cc36e",
+  "importCost.smallPackageDarkColor": "#7cc36e",
+  "oneDarkPro.color": {
+    "dark": "#0000"
+  },
+  "window.autoDetectColorScheme": true,
+  "oneDarkPro.editorTheme": "Just Black"
+}

@@ -1,0 +1,106 @@
+/* For gadgets section */
+.gadget-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 7%;
+  justify-content: center;
+  align-items: center;
+  padding: 0 5%;
+  margin-top: 5%;
+  font-family: "Poppins", serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 1rem;
+}
+
+.arrow {
+  width: 100%;
+}
+
+.arrow > img {
+  width: 100%;
+}
+
+.gadget-container {
+  width: 100%;
+}
+
+.gadget-container > .gadget-children {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6%;
+  width: 100%;
+}
+
+.gadget-children{
+  display: flex;
+  gap: 3%;
+}
+
+.gadget-children > .gadget {
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.gadget > .buy-gadget {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 15%;
+  padding: 7% 0 3% 0;
+  width: 100%;
+}
+
+.gadget > .buy-gadget img {
+  width: 8%;
+  cursor: pointer;
+}
+
+.gadget > .buy-gadget > .spin {
+  width: 40%;
+  font-size: 1rem;
+  display: flex;
+  column-gap: 5%;
+  /* justify-content: space-between; */
+  text-align: center;
+  cursor: pointer;
+}
+
+.gadget > .buy-gadget > span img {
+  width: 20%;
+}
+
+.gadget-item {
+  width: 75%;
+  margin: 0 auto;
+}
+
+.gadget-item > img {
+  width: 100%;
+}
+
+.gadget-price {
+  text-align: center;
+  padding: 3% 0;
+}
+
+.gadget-price > h4 {
+  font-family: "Poppins", serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 1.4rem;
+}
+
+.gadget-price > button {
+  font-family: "Poppins", serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 1rem;
+  margin-top: 5%;
+  padding: 3% 5%;
+  width: 25%;
+  border-radius: 5px;
+  border: none;
+  background-color: grey;
+  color: white;
+}

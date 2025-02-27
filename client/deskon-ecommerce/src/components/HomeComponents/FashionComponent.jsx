@@ -1,3 +1,5 @@
+import "../StylesComponents/Fashion.css";
+
 export const Fashion = () => {
   return (
     <article className="fashion">

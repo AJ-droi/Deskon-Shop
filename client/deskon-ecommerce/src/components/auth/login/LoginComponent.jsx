@@ -1,10 +1,18 @@
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+// import React from "react";
 // import axios from 'axios'
 
 const LoginComponent = () => {
-  const styles = { backgroundImage: "url(../Images/family.psd)" };
+  const styles = {
+    // backgroundImage: "url(/Images/222222222222222222222.jpg)",
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    width: "100%",
+    height: "100vh"
+  };
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,6 +20,8 @@ const LoginComponent = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+         if (email || password === "") navigate("/auth/Login");
     try {
       const response = await fetch("http://localhost:4100/auth/login", {
         method: "POST",
@@ -27,8 +37,12 @@ const LoginComponent = () => {
       // });
 
       const result = await response.json();
+
+      localStorage.setItem('role', result.user.role)
+
       navigate('/');
 
+ 
     
 
       alert(result.message);

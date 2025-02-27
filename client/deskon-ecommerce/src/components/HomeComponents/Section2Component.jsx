@@ -1,4 +1,5 @@
-import { ProductSection } from "./SectionComponent";
+// import { ProductSection } from "./SectionComponent";
+import "../StylesComponents/Section2.css";
 
 export const Section2 = () => {
   const styles = {
@@ -24,10 +25,10 @@ export const Section2 = () => {
     <article className="category-sec">
 
       <h2 style={styles}>Categories</h2>
-      <ProductSection data={[{
+      {/* <ProductSection data={[{
         name:"jane",
         price:"100",
-}]}/>
+}]}/> */}
       <article className="item-categories">
         <div className="item-category">
           <img src="./Images/man.png" alt="" />

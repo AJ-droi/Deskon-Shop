@@ -42,14 +42,14 @@ const AddProduct = () => {
   const role = localStorage.getItem("role");
 
   useEffect(() => {
-   if (role !== "admin"){
+   if (role !== "user"){
     window.history.back();
    }
   }, [role])
 
   return (
     <>
-      {role === "admin" ? (
+      {role === "user" ? (
         <div style={styles}>
           <div className="login">
             <h1>Add New Product</h1>

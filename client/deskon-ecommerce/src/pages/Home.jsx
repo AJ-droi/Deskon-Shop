@@ -11,7 +11,7 @@ import { Section1 } from "../components/HomeComponents/Section1Component";
 import { Section2 } from "../components/HomeComponents/Section2Component";
 import { Banner } from "../components/HomeComponents/BannerComponent";
 import { Fashion } from "../components/HomeComponents/FashionComponent";
-import { Trending } from "../components/HomeComponents/TrendingComponent";
+// import { Trending } from "../components/HomeComponents/TrendingComponent";
 import { Brand } from "../components/HomeComponents/BrandComponent";
 
 
@@ -24,7 +24,7 @@ const Home = () => {
       <Section2 />
       <Banner />
       <Fashion />
-      <Trending />
+      {/* <Trending /> */}
       <Brand />
     </div>
   );

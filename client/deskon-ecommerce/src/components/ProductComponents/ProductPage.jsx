@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 import "../ProductComponents/Product.css";
 import { useEffect, useState } from "react";
 import useCartStore from "../../stores/cart.store";
-
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
+// import { AddToCart } from "../HomeComponents/HeaderComponent";
 
 export const ProductPage = () => {
   const [products, setProducts] = useState([]);
@@ -36,12 +34,19 @@ export const ProductPage = () => {
     setDropdownVisible(false);
   };
 
+  const [open, setOpen] = useState(false);
+  const toggleSidebar = () => {
+    console.log("Toggling Sidebar"); // Debugging
+    setOpen(!open); // Ensure state updates
+  };
+
+
   return (
-    <article>
+    <nav>
       <div className="nav-container">
-        <div className="nav-logo">
-          <img src="./logo192.png" alt="smiling guy" />
-        </div>
+        <Link to="/" className="nav-logo">
+          <img src="./logo192.png" alt="" />
+        </Link>
         <div className="nav-search">
           <input
             type="text"
@@ -80,17 +85,37 @@ export const ProductPage = () => {
             </span>
           </div>
           <img src="./Icons/heart-fill.svg" alt="Favourite" />
-          <img src="./Icons/cart.svg" alt="Cart" />
+          <img src="./Icons/cart.svg" alt="Cart" onClick={toggleSidebar} />
         </div>
       </div>
+
+      {open && (
+        <div className="cart">
+          <div className="mycart">
+            <h2>My Cart</h2>
+          </div>
+          <ul className="productList"></ul>
+
+          <p>Total: #0</p>
+          <div className="checkout">
+            <div className="total">
+              <span>Checkout</span>
+            </div>
+            <div className="close" onClick={toggleSidebar}>
+              Close
+            </div>
+          </div>
+        </div>
+      )}
+
       <h1>Product page</h1>
       <ProductSection data={products} />
-    </article>
+      {/* <AddToCart /> */}
+    </nav>
   );
 };
 
 export const ProductSection = (props) => {
-  // eslint-disable-next-line react/prop-types
   const { data } = props;
 
   const myStyles = {
@@ -98,6 +123,7 @@ export const ProductSection = (props) => {
     gridTemplateColumns: "auto auto auto",
     gap: "5%",
     padding: "7%",
+    position: "relative",
   };
 
   const { addToCart, getCart, changeQuantity, removeFromCart } = useCartStore();
@@ -151,28 +177,21 @@ export const ProductSection = (props) => {
     </div>
   );
 };
-const responsive = {
-  superLargeDesktop: {
-    // the naming can be any, depends on you.
-    breakpoint: { max: 4000, min: 3000 },
-    items: 5,
-  },
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 3,
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2,
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1,
-  },
-};
-<Carousel responsive={responsive}>
-  <div>Item 1</div>
-  <div>Item 2</div>
-  <div>Item 3</div>
-  <div>Item 4</div>
-</Carousel>;
+
+// export const AddToCart = () => {
+//   return (
+//     <div className="cart">
+//       <div className="mycart">
+//         <h2>My Cart</h2>
+//       </div>
+//       <ul className="productList"></ul>
+
+//       <div className="checkout">
+//         <div className="total">
+//           <span>Total</span>#0
+//         </div>
+//         <div className="close">Close</div>
+//       </div>
+//     </div>
+//   );
+// }

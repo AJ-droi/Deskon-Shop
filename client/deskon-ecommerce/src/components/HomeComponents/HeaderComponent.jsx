@@ -1,4 +1,4 @@
-import "../StylesComponents/Header.css"
+import "../StylesComponents/Header.css";
 import { useState } from "react";
 import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
@@ -18,24 +18,39 @@ export const Header = () => {
     setDropdownVisible(false);
   };
 
-  const root = { width: "7%", inset: "5% 0 0 86%", textAlign: "center", position: "absolute" }
+  const [open, setOpen] = useState(false);
+  const toggleSidebar = () => {
+    console.log("Toggling Sidebar"); // Debugging
+    setOpen((prev) => !prev); // Ensure state updates
+  };
+
+  const root = {
+    width: "7%",
+    inset: "5% 0 0 86%",
+    textAlign: "center",
+    position: "absolute",
+  };
   const rootImage = { width: "33%", position: "relative", inset: "0 0 0 -45%" };
-  const rootSpan = {zIndex: "99", position: "absolute", inset: "4.7% 0 0 -35%"}
+  const rootSpan = {
+    zIndex: "99",
+    position: "absolute",
+    inset: "4.7% 0 0 -35%",
+  };
   const rootList = {
     listStyle: "none",
     display: "",
     width: " 65%",
     textAlign: "start",
     boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-    cursor: "pointer"
+    cursor: "pointer",
   };
-  const rootLi = {padding: "4% 0 4% 10%"}
+  const rootLi = { padding: "4% 0 4% 10%" };
   return (
     // First navbar
     <nav>
       <div className="nav-container">
         <div className="nav-logo">
-          <img src="./logo192.png" alt="smiling guy" />
+          <img src="./logo192.png" alt="" />
         </div>
         <div className="nav-search">
           <input
@@ -72,9 +87,28 @@ export const Header = () => {
             )}
           </div>
           <img src="./Icons/heart-fill.svg" alt="Favourite" />
-          <img src="./Icons/cart.svg" alt="Cart" />
+          <img src="./Icons/cart.svg" alt="Cart" onClick={toggleSidebar} />
         </div>
       </div>
+
+      {open && (
+        <div className="cart">
+          <div className="mycart">
+            <h2>My Cart</h2>
+          </div>
+          <ul className="productList"></ul>
+
+          <p>Total: #0</p>
+          <div className="checkout">
+            <div className="total">
+              <span>Checkout</span>
+            </div>
+            <div className="close" onClick={toggleSidebar}>
+              Close
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Second navbar */}
       <div className="nav-container2">
@@ -90,19 +124,19 @@ export const Header = () => {
 
           {openDropDown && (
             <div className="list-items">
-              <libhhhds>Fashion</libhhhds>
-              <libhhhds>Electronics</libhhhds>
-              <libhhhds>Beverages</libhhhds>
-              <libhhhds>Food</libhhhds>
-              <libhhhds>Toys</libhhhds>
-              <libhhhds>Health</libhhhds>
+              <li>Fashion</li>
+              <li>Electronics</li>
+              <li>Beverages</li>
+              <li>Food</li>
+              <li>Toys</li>
+              <li>Health</li>
             </div>
           )}
         </ul>
 
         <ul className="nav-items">
           <li>Home</li>
-          <li>Brand</li>
+          <li>{/* <Link to="/products/Cart.page.jsx">Brand</Link> */} Brand</li>
           <li>
             <Link to="/products">Products</Link>
           </li>
@@ -117,3 +151,21 @@ export const Header = () => {
     </nav>
   );
 };
+
+// export const AddToCart = () => {
+//   return (
+//     <div className="cart">
+//       <div className="mycart">
+//         <h2>My Cart</h2>
+//       </div>
+//       <ul className="productList"></ul>
+
+//       <div className="checkout">
+//         <div className="total">
+//           <span>Total</span>#0
+//         </div>
+//         <div className="close">Close</div>
+//       </div>
+//     </div>
+//   );
+// };

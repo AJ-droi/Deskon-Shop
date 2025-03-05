@@ -10,6 +10,7 @@ import ForgotPassword from "./pages/auth/ForgotPassword.jsx";
 import ResetPassword from "./pages/auth/ResetPassword.jsx";
 import Product from "./pages/product/Product.jsx";
 import AddProduct from "./pages/product/AddProduct.jsx";
+// import Cart from  "./pages/product/Cart.page.jsx"
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           </Route>
           <Route path="products" element={<Product />}></Route>
           <Route path="add-products" element={<AddProduct />}></Route>
+          {/* <Route path="addToCart" element={<Cart.page />}></Route> */}
         </Routes>
       </Router>
 

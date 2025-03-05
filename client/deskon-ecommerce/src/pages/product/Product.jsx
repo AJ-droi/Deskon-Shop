@@ -1,4 +1,4 @@
-import { ProductPage } from "../../components/ProductComponents/ProductPage";
+import { ProductPage } from "../../components/ProductComponents/ProductPage.jsx";
 
 
 const Product = () => {
